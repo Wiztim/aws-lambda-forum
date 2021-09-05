@@ -6,10 +6,10 @@ The Get functions reads the database for the relevant boards/posts/comments and 
 <br>Create functions are used to create new posts/comments.
 <br>CreateBoard was used to create the initial boards, and users shouldn't be able to access this.
 
-<br>Amazon DynamoDB is used to handle data storage.
+Amazon DynamoDB is used to handle data storage.
 <br>Amazon API Gateway is used to handle resource paths to the Lambda functions.
-<br>Amazon S3 will be used to handle image hosting
-<br>Amazon Elasticache will be used to handle caching frequently accessed database items.
 
 <br>Current features are creating a post and replying to a post.
 <br>Considered features are a custom url, uploading images to posts/comments, quoting a post/comment, caching, sorting, user profiles, moderator roles, reporting, and post/comment deletion.
+<br>Amazon S3 will be used to handle image hosting
+<br>Amazon Elasticache will be used to handle caching frequently accessed database items.
