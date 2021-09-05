@@ -6,6 +6,10 @@ These are the lambda functions for my serverless forum.
 * Create functions are used to create new posts/comments.
 * CreateBoard was used to create the initial boards, and users shouldn't be able to access this.
 
+## Building
+* This is not intended to be ran locally.
+* Set up requires configuring AWS DynamoDB, API Gateway, IAM Permissions, S3, and Lambda.
+
 ## Current Features
 * Amazon DynamoDB is used to handle data storage.
 * Amazon API Gateway is used to handle resource paths to the Lambda functions.
