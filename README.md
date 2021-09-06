@@ -1,4 +1,4 @@
-These are the lambda functions for my serverless forum. 
+See it in action at: https://wiztim.dev/
 ## Lambda Functions
 * All functions written in python.
 * The Get functions reads the database for the relevant boards/posts/comments and returns a HTML page that is used to display the forum.
