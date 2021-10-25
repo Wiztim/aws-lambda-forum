@@ -3,59 +3,76 @@ import boto3
 import time
 import uuid
 
+
 client = boto3.client('dynamodb')
+lambdaClient = boto3.client('lambda')
 
 def lambda_handler(event, context):
 
-    try:
-        print("Hello World 2.")
-        bodyJson = json.loads(event['body'])
-        epochTime = int(time.time())
-        parentPostId = event['pathParameters']['postId']
-        content = bodyJson['content']
-        username = bodyJson['username']
+    bodyJson = json.loads(event['body'])
+    epochTime = int(time.time())
+    parentPostId = event['pathParameters']['postId']
+    content = bodyJson['content']
+    username = bodyJson['username']
+    opTime = bodyJson['opTime']
+    
+    if username == "":
+        username = 'Anonymous'
         
-        if username == "":
-            username = 'Anonymous'
-            
-        if content == "":
-            return {
-                'statusCode' : 400
+    if content == "":
+        return {
+            'statusCode' : 400
+        }
+        
+    data = client.put_item(TableName='BoardsPostsComments',
+        Item = {
+            'id':{
+                'S':str(uuid.uuid4())
+            },
+            'timestamp':{
+                'N':str(epochTime)
+            },
+            'parentId':{
+                'S':parentPostId
+            },
+            'type':{
+                'S':'comment'  
+            },
+            'content':{
+                'S':content
+            },
+            'username':{
+                'S':username
             }
+        }
+    )
 
-        data = client.put_item(TableName='BoardsPostsComments',
-            Item = {
+    try:
+        client.update_item(
+            TableName='BoardsPostsComments',
+            Key={
                 'id':{
-                    'S':str(uuid.uuid4())
+                    'S':parentPostId
                 },
                 'timestamp':{
-                    'N':str(epochTime)
-                },
-                'parentId':{
-                    'S':str(parentPostId)
-                },
-                'type':{
-                    'S':'comment'  
-                },
-                'content':{
-                    'S':content
-                },
-                'username':{
-                    'S':str(username)
+                    'N':str(opTime)
                 }
-            }
+            },
+            UpdateExpression="SET latestActivity=:t",
+            ExpressionAttributeValues={
+                ':t':{
+                    'N':str(epochTime)
+                }
+            },
+            ReturnValues="UPDATED_NEW"
         )
         
-        updatePostActivity(parentPostId, epochTime)
-        
     except:
-        print(sys.exc_info())
         return {
             'statusCode': 400,
-            'body': str(sys.exc_info())
+            'body': event
         }
 
-    print("End world")
     return {
         'statusCode': 200,
         'headers': {
