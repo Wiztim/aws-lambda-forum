@@ -47,6 +47,9 @@ def lambda_handler(event, context):
                 },
                 'username':{
                     'S':str(username)
+                },
+                'latestActivity':{
+                    'N':str(epochTime)
                 }
             }
         )
