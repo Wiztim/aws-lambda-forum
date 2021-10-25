@@ -27,11 +27,11 @@ def lambda_handler(event, context):
     commentArr = data["Items"]
     
     html = "<html><link rel=stylesheet href=https://wiztim-forum.s3.amazonaws.com/bootstrap.min.css><body style=background-color:CDCDCD>"
-    html += "<h5 style=\"position:absolute; left:2%; top:5%;\"><a href=\"https://tcze7o1n4k.execute-api.us-east-1.amazonaws.com/boards\">Forum Name</a> > <a href=\"https://tcze7o1n4k.execute-api.us-east-1.amazonaws.com/boards/" + boardData['id'] + "/posts\">" + boardData['title'] + "</a> > " + postData['title'] + "</h5>"
+    html += "<h5 style=\"position:absolute; left:2%; top:5%;\"><a href=https://github.com/Wiztim/aws-lambda-forum target=\"_blank\" rel=\"noopener noreferrer\">GitHub Repo</a><br><a href=\"/boards\">Phoenix Forum</a> > <a href=\"/boards/" + boardData['id'] + "/posts\">" + boardData['title'] + "</a> > " + postData['title'] + "</h5>"
     html += "<div style=\"position:absolute; left:10%; top:10%;\">"
     html += "<br><h3>" + postData['title'] + "</h3>"
     
-    html += "<button type=button id=createPost>Reply to post</button>"
+    html += "<button style=background-color:BDFFBD type=button id=createPost>Reply to post</button>"
     html += "<script type=\"text/javascript\">document.getElementById(\"createPost\").onclick = function() {if(document.getElementById(\"createPost\").innerHTML === \'Reply to post\'){document.getElementById(\"postForm\").style.display = \"block\";document.getElementById(\"createPost\").innerHTML = \'Close Post Form\';}else{document.getElementById(\"postForm\").style.display = \"none\";document.getElementById(\"createPost\").innerHTML = \'Reply to post\';}}</script>"
     html += "<div style=display:none id=postForm>Body: <textarea id=bodyInput></textarea><br>Username: <input type=text id=nameInput style=\"position:absolute;\"></input><br>"
     html += "<button type=button id=submitPost>Submit Post</button>"
