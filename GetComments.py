@@ -34,8 +34,8 @@ def lambda_handler(event, context):
     html += "<button style=background-color:BDFFBD type=button id=createPost>Reply to post</button>"
     html += "<script type=\"text/javascript\">document.getElementById(\"createPost\").onclick = function() {if(document.getElementById(\"createPost\").innerHTML === \'Reply to post\'){document.getElementById(\"postForm\").style.display = \"block\";document.getElementById(\"createPost\").innerHTML = \'Close Post Form\';}else{document.getElementById(\"postForm\").style.display = \"none\";document.getElementById(\"createPost\").innerHTML = \'Reply to post\';}}</script>"
     html += "<div style=display:none id=postForm>Body: <textarea id=bodyInput></textarea><br>Username: <input type=text id=nameInput style=\"position:absolute;\"></input><br>"
-    html += "<button type=button id=submitPost>Submit Post</button>"
-    html += "<script type=text/javascript>document.getElementById(\"submitPost\").onclick = async function() {let postData = {\"content\":bodyInput.value,\"username\":nameInput.value};postData = JSON.stringify(postData); await fetch(\"https://tcze7o1n4k.execute-api.us-east-1.amazonaws.com/boards/" + boardData['id'] + "/posts/" + postData['id'] + "/comments\", {method:\"POST\", body:postData}); location.reload();return false;}</script></div>"
+    html += "<button style=background-color:BDFFBD type=button id=submitPost>Submit Post</button>"
+    html += "<script type=text/javascript>document.getElementById(\"submitPost\").onclick = async function() {let postData = {\"content\":bodyInput.value,\"username\":nameInput.value,\"opTime\":" + postData['timestamp'] + "};postData = JSON.stringify(postData); await fetch(\"https://tcze7o1n4k.execute-api.us-east-1.amazonaws.com/boards/" + boardData['id'] + "/posts/" + postData['id'] + "/comments\", {method:\"POST\", body:postData}); location.reload();}</script></div>"
 
     postTime = time.strftime('%m-%d-%Y at %H:%M:%S (UTC)', time.localtime(int(postData['timestamp'])))
     html += '<div style=\"border:3px; border-style:solid; width:80vw\"><u>' + postData['username'] + '</u><br>'
