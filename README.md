@@ -1,4 +1,7 @@
-See it in action at: https://wiztim.dev/
+AWS changed how API gateway works, how Python lambda functions return strings, and how information is sent to lambda. So this forum no longer works. 
+The front page is displayed (and some quoation marks), but the links do not work.
+
+~~See it in action at: https://wiztim.dev/~~
 ## Lambda Functions
 * All functions written in python.
 * The Get functions reads the database for the relevant boards/posts/comments and returns a HTML page that is used to display the forum.
