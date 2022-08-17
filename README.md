@@ -1,6 +1,8 @@
 AWS changed how API gateway works, how Python lambda functions return strings, and how information is sent to lambda. So this forum no longer works. 
 The front page is displayed (and some quoation marks), but the links do not work.
 
+All the Python files in this Github are old and do not work.
+
 ~~See it in action at: https://wiztim.dev/~~
 ## Lambda Functions
 * All functions written in python.
